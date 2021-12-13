@@ -1,30 +1,30 @@
 package com.EugeneVJenkinz.SimpleWorkoutTracker.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
-import java.math.BigInteger;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "unique_training")
 public class UniqueTraining {
     @Id
-    @Column(name = "unique_training_id")
-    private String uniqueTrainingId;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "unique_training_id", updatable = false, nullable = false)
+    private UUID id;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "unique_exercise_id")
     private List<UniqueExercise> uniqueExerciseList;
-    @Column(name = "date")
+    @Column(name = "training_date")
     private String date;
 
     public UniqueTraining() {
     }
 
-    public String getUniqueTrainingId() {
-        return uniqueTrainingId;
-    }
-
-    public void setUniqueTrainingId(String uniqueTrainingId) {
-        this.uniqueTrainingId = uniqueTrainingId;
+    public String getId() {
+        return id.toString();
     }
 
     public List<UniqueExercise> getUniqueExerciseList() {

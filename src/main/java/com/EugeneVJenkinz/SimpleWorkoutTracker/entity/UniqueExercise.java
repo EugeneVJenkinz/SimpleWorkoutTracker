@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "unique_exercises")
 public class UniqueExercise {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "unique_exercise_id")
     private String uniqueExerciseId;
     @ManyToOne(cascade = CascadeType.REFRESH)

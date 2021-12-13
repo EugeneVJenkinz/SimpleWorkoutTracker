@@ -7,13 +7,14 @@ import java.util.List;
 @Table(name = "users")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private String userId;
     @Column(name = "username")
     private String username;
     @Column(name = "password")
     private String password;
-    @Column(name = "training_history")
+    @Column(name = "unique_training")
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "unique_training_id")
     private List<UniqueTraining> uniqueTrainingHistory;

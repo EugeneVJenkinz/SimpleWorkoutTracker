@@ -1,14 +1,12 @@
 package com.EugeneVJenkinz.SimpleWorkoutTracker.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "exercises")
 public class Exercise {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "exercise_id")
     private String exerciseId;
     @Column(name = "name")
