@@ -64,10 +64,4 @@ public class Config {
         resolver.setSuffix(".jsp");
         return resolver;
     }
-
-    @Bean
-    @Scope("prototype")
-    public UniqueTrainingDAO uniqueTrainingDAO() {
-        return new UniqueTrainingDAOImpl();
-    }
 }

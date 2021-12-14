@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Scope("prototype")
 public class UniqueTrainingDAOImpl implements UniqueTrainingDAO {
     @Autowired
     private SessionFactory sessionFactory;

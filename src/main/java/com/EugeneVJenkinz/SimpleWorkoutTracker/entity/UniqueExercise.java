@@ -9,7 +9,7 @@ public class UniqueExercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "unique_exercise_id")
     private String uniqueExerciseId;
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
     @Column(name = "repeats")

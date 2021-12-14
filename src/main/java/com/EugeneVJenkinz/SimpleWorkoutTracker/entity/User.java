@@ -1,15 +1,20 @@
 package com.EugeneVJenkinz.SimpleWorkoutTracker.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private String userId;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "user_id", updatable = false, nullable = false)
+    private UUID userId;
     @Column(name = "username")
     private String username;
     @Column(name = "password")
@@ -23,11 +28,7 @@ public class User {
     }
 
     public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+        return userId.toString();
     }
 
     public String getUsername() {
@@ -52,5 +53,10 @@ public class User {
 
     public void setUniqueTrainingHistory(List<UniqueTraining> uniqueTrainingHistory) {
         this.uniqueTrainingHistory = uniqueTrainingHistory;
+    }
+
+    public void setOneUniqueTraining(UniqueTraining uniqueTraining) {
+        if (uniqueTrainingHistory == null) uniqueTrainingHistory = new LinkedList<>();
+        uniqueTrainingHistory.add(uniqueTraining);
     }
 }
