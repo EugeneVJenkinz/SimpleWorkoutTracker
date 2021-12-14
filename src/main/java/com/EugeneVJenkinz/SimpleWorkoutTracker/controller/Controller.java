@@ -36,10 +36,8 @@ public class Controller {
         String currentDate = dateFormat.format(date);
         uniqueTraining.setDate(currentDate);
         User user = userDAO.getUserByUsername(principal.getName());
-        user.setOneUniqueTraining(uniqueTraining);
         uniqueTrainingDAO.saveUniqueTraining(uniqueTraining);
         model.addAttribute("trainingTime", uniqueTraining.getDate());
-        System.out.println(user.getUniqueTrainingHistory());
         return "new-training";
     }
 }

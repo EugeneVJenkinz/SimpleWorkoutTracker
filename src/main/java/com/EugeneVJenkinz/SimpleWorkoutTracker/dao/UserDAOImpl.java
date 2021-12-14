@@ -28,8 +28,10 @@ public class UserDAOImpl implements UserDAO {
     @Transactional
     public User getUserByUsername(String username) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("SELECT User FROM User WHERE username=:username");
-        query.setParameter("username", username);
-        return (User) query.getSingleResult();
+        Query queryForId = session.createQuery("SELECT userId FROM User WHERE username=:username");
+        queryForId.setParameter("username", username);
+
+        UUID uuid = (UUID) queryForId.getSingleResult();
+        return session.get(User.class, uuid);
     }
 }

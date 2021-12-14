@@ -27,8 +27,12 @@ public class User {
     public User() {
     }
 
-    public String getUserId() {
+    public String getUserIdString() {
         return userId.toString();
+    }
+
+    public UUID getUserId() {
+        return userId;
     }
 
     public String getUsername() {
@@ -56,7 +60,7 @@ public class User {
     }
 
     public void setOneUniqueTraining(UniqueTraining uniqueTraining) {
-        if (uniqueTrainingHistory == null) uniqueTrainingHistory = new LinkedList<>();
+        if (uniqueTrainingHistory.equals(null)) uniqueTrainingHistory = new LinkedList<>();
         uniqueTrainingHistory.add(uniqueTraining);
     }
 }
