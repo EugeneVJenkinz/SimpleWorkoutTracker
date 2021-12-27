@@ -1,5 +1,6 @@
 package com.EugeneVJenkinz.SimpleWorkoutTracker.dao;
 
+import com.EugeneVJenkinz.SimpleWorkoutTracker.entity.UniqueTraining;
 import com.EugeneVJenkinz.SimpleWorkoutTracker.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,10 +29,17 @@ public class UserDAOImpl implements UserDAO {
     @Transactional
     public User getUserByUsername(String username) {
         Session session = sessionFactory.getCurrentSession();
-        Query queryForId = session.createQuery("SELECT userId FROM User WHERE username=:username");
+        Query queryForId = session.createQuery("SELECT user_id FROM User WHERE username=:username");
         queryForId.setParameter("username", username);
 
         UUID uuid = (UUID) queryForId.getSingleResult();
         return session.get(User.class, uuid);
+    }
+
+    @Override
+    @Transactional
+    public void update(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(user);
     }
 }

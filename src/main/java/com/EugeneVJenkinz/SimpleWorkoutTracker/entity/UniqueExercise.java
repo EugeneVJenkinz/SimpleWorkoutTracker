@@ -1,54 +1,87 @@
 package com.EugeneVJenkinz.SimpleWorkoutTracker.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "unique_exercises")
 public class UniqueExercise {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "unique_exercise_id")
-    private String uniqueExerciseId;
-    @OneToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "exercise_id")
-    private Exercise exercise;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID unique_exercise_id;
+    @Column(name = "exercise_name")
+    private String exercise_name;
+    @Column(name = "approach_number")
+    private int approach_number;
+    @Column(name = "weight")
+    private int weight;
     @Column(name = "repeats")
-    private int repeats;
+    private Integer repeats;
     @Column(name = "relax_time")
-    private int relaxTime;
+    private Integer relax_time;
+    @ManyToOne
+    @JoinColumn(name="unique_training_id")
+    UniqueTraining uniqueTraining;
 
     public UniqueExercise() {
     }
 
-    public Exercise getExercise() {
-        return exercise;
+    public String getExercise_name() {
+        return exercise_name;
     }
 
-    public void setExercise(Exercise exercise) {
-        this.exercise = exercise;
+    public void setExercise_name(String exercise_name) {
+        this.exercise_name = exercise_name;
     }
 
-    public String getUniqueExerciseId() {
-        return uniqueExerciseId;
+    public int getApproach_number() {
+        return approach_number;
     }
 
-    public void setUniqueExerciseId(String uniqueExerciseId) {
-        this.uniqueExerciseId = uniqueExerciseId;
+    public void setApproach_number(int approach_number) {
+        this.approach_number = approach_number;
     }
 
-    public int getRepeats() {
+    public UUID getUnique_exercise_id() {
+        return unique_exercise_id;
+    }
+
+    public void setUnique_exercise_id(UUID uniqueExerciseId) {
+        this.unique_exercise_id = uniqueExerciseId;
+    }
+
+    public Integer getRepeats() {
         return repeats;
     }
 
-    public void setRepeats(int repeats) {
+    public void setRepeats(Integer repeats) {
         this.repeats = repeats;
     }
 
-    public int getRelaxTime() {
-        return relaxTime;
+    public Integer getRelax_time() {
+        return relax_time;
     }
 
-    public void setRelaxTime(int relaxTime) {
-        this.relaxTime = relaxTime;
+    public void setRelax_time(Integer relaxTime) {
+        this.relax_time = relaxTime;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public UniqueTraining getUniqueTraining() {
+        return uniqueTraining;
+    }
+
+    public void setUniqueTraining(UniqueTraining uniqueTraining) {
+        this.uniqueTraining = uniqueTraining;
     }
 }

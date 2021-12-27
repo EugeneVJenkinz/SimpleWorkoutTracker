@@ -10,11 +10,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
+import java.util.Date;
+import java.util.UUID;
+
 @Repository
 @Scope("prototype")
 public class UniqueTrainingDAOImpl implements UniqueTrainingDAO {
     @Autowired
     private SessionFactory sessionFactory;
+    @Autowired
+    private UserDAO userDAO;
 
     @Override
     @Transactional
@@ -25,7 +31,7 @@ public class UniqueTrainingDAOImpl implements UniqueTrainingDAO {
 
     @Override
     @Transactional
-    public UniqueTraining getUniqueTraining(String uniqueTrainingId) {
+    public UniqueTraining getUniqueTraining(UUID uniqueTrainingId) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(UniqueTraining.class, uniqueTrainingId);
     }

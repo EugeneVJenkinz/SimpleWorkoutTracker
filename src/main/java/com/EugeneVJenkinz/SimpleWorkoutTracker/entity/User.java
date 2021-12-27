@@ -14,25 +14,23 @@ public class User {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "user_id", updatable = false, nullable = false)
-    private UUID userId;
+    private UUID user_id;
     @Column(name = "username")
     private String username;
     @Column(name = "password")
     private String password;
-    @Column(name = "unique_training")
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "unique_training_id")
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     private List<UniqueTraining> uniqueTrainingHistory;
 
     public User() {
     }
 
     public String getUserIdString() {
-        return userId.toString();
+        return user_id.toString();
     }
 
-    public UUID getUserId() {
-        return userId;
+    public UUID getUser_id() {
+        return user_id;
     }
 
     public String getUsername() {

@@ -1,26 +1,29 @@
 package com.EugeneVJenkinz.SimpleWorkoutTracker.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "exercises")
 public class Exercise {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exercise_id")
-    private String exerciseId;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID exercise_id;
     @Column(name = "name")
     private String name;
 
     public Exercise() {
     }
 
-    public String getExerciseId() {
-        return exerciseId;
+    public UUID getExercise_id() {
+        return exercise_id;
     }
 
-    public void setExerciseId(String exerciseId) {
-        this.exerciseId = exerciseId;
+    public void setExercise_id(UUID exerciseId) {
+        this.exercise_id = exerciseId;
     }
 
     public String getName() {

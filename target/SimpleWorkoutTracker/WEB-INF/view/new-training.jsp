@@ -1,11 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 
-<html>
-
 <body>
-<h2>New training is created, date is:</h2>
-
+<h2>New training is created</h2>
+<br><br>
+<input type="button" value="Add exercises" onclick="window.location.href='newExercise'">
 </body>
 
 </html>
