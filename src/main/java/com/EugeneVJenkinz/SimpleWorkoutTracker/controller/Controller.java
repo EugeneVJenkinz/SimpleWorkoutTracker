@@ -1,6 +1,7 @@
 package com.EugeneVJenkinz.SimpleWorkoutTracker.controller;
 
 import com.EugeneVJenkinz.SimpleWorkoutTracker.dao.ExerciseDAO;
+import com.EugeneVJenkinz.SimpleWorkoutTracker.dao.UniqueExerciseDAO;
 import com.EugeneVJenkinz.SimpleWorkoutTracker.dao.UniqueTrainingDAO;
 import com.EugeneVJenkinz.SimpleWorkoutTracker.dao.UserDAO;
 import com.EugeneVJenkinz.SimpleWorkoutTracker.entity.*;
@@ -22,7 +23,9 @@ public class Controller {
     private UniqueTrainingDAO uniqueTrainingDAO;
     private UserDAO userDAO;
     private ExerciseDAO exerciseDAO;
+    private UniqueExerciseDAO uniqueExerciseDAO;
     private UniqueTraining currentUniqueTraining;
+
 
     @Autowired
     public void setUniqueTrainingDAO(UniqueTrainingDAO uniqueTrainingDAO) {
@@ -36,9 +39,13 @@ public class Controller {
     public void setExerciseDAO(ExerciseDAO exerciseDAO) {
         this.exerciseDAO = exerciseDAO;
     }
+    @Autowired
+    public void setUniqueExerciseDAO(UniqueExerciseDAO uniqueExerciseDAO) {
+        this.uniqueExerciseDAO = uniqueExerciseDAO;
+    }
 
     @GetMapping("/")
-    public String showDetails(Model model, Principal principal) {
+    public String showWelcomePage(Model model, Principal principal) {
         model.addAttribute("username", principal.getName());
         return "welcome-page";
     }
@@ -66,20 +73,16 @@ public class Controller {
 
     //Метод получает текущего пользователя и его последнюю созданную тренировку
     //Создаётся упражнение
-    //Добавить: сохранение упражнения в БД, внутри тренировки пользователя, проверить цикличность добавления
     @RequestMapping("/newExercise")
-    public String newExercise(Model model, Principal principal) {
-        UniqueExercise uniqueExercise = new UniqueExercise();
-        model.addAttribute("uniqueExercise", uniqueExercise);
+    public String newExercise(@ModelAttribute("uniqueExercise") UniqueExercise uniqueExercise, Model model) {
         List<Exercise> exerciseList = exerciseDAO.getExerciseList();
-        //Заменить на лямбду
         List<String> exerciseNames = new LinkedList<>();
-        for (Exercise exercise : exerciseList) {
-            exerciseNames.add(exercise.getName());
-        }
+        exerciseList.forEach(x -> exerciseNames.add(x.getName()));
         model.addAttribute("exerciseNames", exerciseNames);
-        User user = userDAO.getUserByUsername(principal.getName());
         UniqueTraining uniqueTraining = uniqueTrainingDAO.getUniqueTraining(currentUniqueTraining.getId());
+        uniqueTraining.addExercise(uniqueExercise);
+        uniqueExercise.setUniqueTraining(uniqueTraining);
+        uniqueExerciseDAO.saveUniqueExercise(uniqueExercise);
         return "add-exercises-to-current-training";
     }
 }

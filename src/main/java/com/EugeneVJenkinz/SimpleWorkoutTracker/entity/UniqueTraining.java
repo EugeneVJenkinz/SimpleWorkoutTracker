@@ -3,6 +3,7 @@ package com.EugeneVJenkinz.SimpleWorkoutTracker.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -55,5 +56,10 @@ public class UniqueTraining {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void addExercise(UniqueExercise uniqueExercise) {
+        if (uniqueExerciseList.equals(null)) uniqueExerciseList = new LinkedList<>();
+        uniqueExerciseList.add(uniqueExercise);
     }
 }

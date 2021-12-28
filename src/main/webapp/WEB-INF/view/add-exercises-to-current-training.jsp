@@ -19,6 +19,8 @@
     Relax time<form:input path="relax_time"/>
     <br>
     <input type="submit" value="Add another one">
+    <br>
 </form:form>
+<input type="button" value="Return on main page" onclick="window.location.href='/Tracker'">
 </body>
 </html>

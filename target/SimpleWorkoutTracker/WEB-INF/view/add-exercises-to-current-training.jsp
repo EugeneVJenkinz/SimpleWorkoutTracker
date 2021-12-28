@@ -10,12 +10,17 @@
         <form:options items="${exerciseNames}"/>
     </form:select>
     <br>
-    Name<form:input path="weight"/>
+    Approach number<form:input path="approach_number"/>
     <br>
-    Surname<form:input path="repeats"/>
+    Weight<form:input path="weight"/>
     <br>
-    Surname<form:input path="relax_time"/>
+    Repeats<form:input path="repeats"/>
+    <br>
+    Relax time<form:input path="relax_time"/>
+    <br>
     <input type="submit" value="Add another one">
+    <br>
 </form:form>
+<input type="button" value="Return on main page" onclick="window.location.href='/Tracker'">
 </body>
 </html>

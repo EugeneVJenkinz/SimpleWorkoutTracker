@@ -19,8 +19,6 @@ import java.util.UUID;
 public class UniqueTrainingDAOImpl implements UniqueTrainingDAO {
     @Autowired
     private SessionFactory sessionFactory;
-    @Autowired
-    private UserDAO userDAO;
 
     @Override
     @Transactional
