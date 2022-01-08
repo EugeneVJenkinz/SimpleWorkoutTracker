@@ -71,8 +71,6 @@ public class Controller {
         return "new-training";
     }
 
-    //Метод получает текущего пользователя и его последнюю созданную тренировку
-    //Создаётся упражнение
     @RequestMapping("/newExercise")
     public String newExercise(@ModelAttribute("uniqueExercise") UniqueExercise uniqueExercise, Model model) {
         List<Exercise> exerciseList = exerciseDAO.getExerciseList();
